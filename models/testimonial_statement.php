@@ -2,7 +2,7 @@
 
 class Testimonial_Statement extends Db_ActiveRecord 
 {
-    
+
     public $table_name = 'testimonial_statements';
 
     public $has_many = array(
@@ -19,13 +19,13 @@ class Testimonial_Statement extends Db_ActiveRecord
     public function define_columns($context = null) 
     {
         $this->define_column('title', 'Title')->order('asc')->validation()->fn('trim')->required("Please specify the title.");
-        $this->define_column('slug', 'Slug')->validation()->fn('trim');
-        $this->define_column('author_name', 'Author Name')->invisible()->validation()->fn('trim');
-        $this->define_column('author_company', 'Author Company')->invisible()->validation()->fn('trim');
-        $this->define_column('author_link', 'Author Link')->invisible()->validation()->fn('trim');
-        $this->define_column('excerpt', 'Excerpt')->invisible()->validation()->fn('trim');
-        $this->define_column('content', 'Content')->invisible()->validation()->fn('trim');
-        $this->define_column('sort_order', 'Sort Order')->validation()->fn('trim')->unique("This sort order is already in use.");
+        $this->define_column('url', 'URL Name')->validation()->fn('trim');
+        $this->define_column('author_name', 'Author Name')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('author_company', 'Author Company')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('author_link', 'Author Link')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('excerpt', 'Excerpt')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('content', 'Content')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('sort_order', 'Sort Order')->defaultInvisible()->validation()->fn('trim')->unique("This sort order is already in use.");
         $this->define_column('is_enabled', 'Enabled');
         $this->define_multi_relation_column('images', 'images', 'Images', '@name')->invisible();
     }
@@ -33,11 +33,11 @@ class Testimonial_Statement extends Db_ActiveRecord
     public function define_form_fields($context = null) 
     {
         $this->add_form_field('is_enabled')->tab('Statement')->renderAs(frm_checkbox);
-        $this->add_form_field('title', 'left')->tab('Statement')->renderAs(frm_text);
-        $this->add_form_field('slug', 'right')->tab('Statement')->renderAs(frm_text);
-        $this->add_form_field('author_name', 'full')->tab('Statement')->renderAs(frm_text);
-        $this->add_form_field('author_company', 'left')->tab('Statement')->renderAs(frm_text);
-        $this->add_form_field('author_link', 'right')->tab('Statement')->renderAs(frm_text);
+        $this->add_form_field('title', 'left')->tab('Statement');
+        $this->add_form_field('url', 'right')->tab('Statement');
+        $this->add_form_field('author_name', 'full')->tab('Statement');
+        $this->add_form_field('author_company', 'left')->tab('Statement');
+        $this->add_form_field('author_link', 'right')->tab('Statement');
 
         $content_field = $this->add_form_field('excerpt')->renderAs(frm_html)->size('small')->tab('Statement');
         $content_field->htmlPlugins .= ',save,fullscreen,inlinepopups';

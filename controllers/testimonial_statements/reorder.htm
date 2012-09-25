@@ -1,0 +1,22 @@
+<? Admin_Breadcrumb::add($this->strings['controller_title'], $this->strings['controller_url'])->add($this->app_page_title);?>
+<? Phpr_View::beginBlock("head") ?>
+    <script type="text/javascript" src="<?=root_url($this->strings['module_path'].'/assets/javascript/reorder.js')?>"></script>
+    <script type="text/javascript">
+        reorder("<?=$this->strings['controller_class']?>");
+    </script>
+<? Phpr_View::endBlock() ?>
+<? Phpr_View::beginBlock("view") ?>
+
+    <?=flash() ?>
+    
+    <?=$this->hint_render('sort_order', 'Manage '.$this->strings['model_name'].' order by dragging the arrow icons in the list below.')?>
+
+    <div class="toolbar">
+        <?=cp_button('Return to the '.$this->strings['controller_name'].' list', 'go_back', url($this->strings['controller_url'])) ?>
+        <div class="clear"></div>
+    </div>
+
+    <?=Phpr_Form::openTag(array('id' => $this->listGetFormId())) ?>
+        <?=$this->listRender() ?>
+    </form>
+<? Phpr_View::endBlock() ?>
