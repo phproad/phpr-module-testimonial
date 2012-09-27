@@ -9,5 +9,6 @@ CREATE TABLE `testimonial_statements` (
   `author_link` varchar(100) DEFAULT NULL,
   `author_company` varchar(100) DEFAULT NULL,
   `is_enabled` tinyint(4) DEFAULT NULL,
+  `submitted_at` date default NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

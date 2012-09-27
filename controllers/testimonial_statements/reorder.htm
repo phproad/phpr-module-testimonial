@@ -16,7 +16,7 @@
         <div class="clear"></div>
     </div>
 
-    <?=Phpr_Form::openTag(array('id' => $this->listGetFormId())) ?>
+    <?=form_open(array('id'=>$this->listGetFormId()))?>
         <?=$this->listRender() ?>
-    </form>
+    <?=form_close()?>
 <? Phpr_View::endBlock() ?>

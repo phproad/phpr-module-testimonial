@@ -18,6 +18,7 @@ class Testimonial_Actions extends Cms_Action_Base
 		$idea = Testimonial_Statement::create();
         $idea->init_columns_info();
         $idea->is_enabled = false;
+        $idea->submitted_at = Phpr_DateTime::now();
 		$idea->save($_POST);
 
         if (!post('no_flash'))

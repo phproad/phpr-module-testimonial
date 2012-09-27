@@ -59,7 +59,7 @@ class Testimonial_Statements extends Admin_Controller
     
         parent::__construct();
         
-        $this->app_tab = $this->strings['module_name'];
+        $this->app_menu = 'testimonials';
         $this->app_module_name = $this->strings['module_title'];
         $this->app_page = $this->strings['controller_table_name'];
         $this->list_record_url = url($this->strings['controller_url'] . '/edit/');
@@ -70,7 +70,7 @@ class Testimonial_Statements extends Admin_Controller
             $this->list_record_url = null;
             $this->list_search_enabled = false;
             $this->list_no_interaction = true;
-            $this->list_columns = array('title', 'slug', 'is_enabled');
+            $this->list_columns = array('title', 'url', 'is_enabled');
             $this->list_custom_body_cells = PATH_APP.'/modules/'.$this->strings['module_name'].'/controllers/'.$this->strings['controller_code'].'/_body_cells.htm';
             $this->list_custom_head_cells = PATH_APP.'/modules/'.$this->strings['module_name'].'/controllers/'.$this->strings['controller_code'].'/_head_cells.htm';
         }       

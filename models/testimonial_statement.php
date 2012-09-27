@@ -23,6 +23,7 @@ class Testimonial_Statement extends Db_ActiveRecord
         $this->define_column('author_name', 'Author Name')->defaultInvisible()->validation()->fn('trim');
         $this->define_column('author_company', 'Author Company')->defaultInvisible()->validation()->fn('trim');
         $this->define_column('author_link', 'Author Link')->defaultInvisible()->validation()->fn('trim');
+        $this->define_column('submitted_at', 'Date Published');
         $this->define_column('excerpt', 'Excerpt')->defaultInvisible()->validation()->fn('trim');
         $this->define_column('content', 'Content')->defaultInvisible()->validation()->fn('trim');
         $this->define_column('sort_order', 'Sort Order')->defaultInvisible()->validation()->fn('trim')->unique("This sort order is already in use.");
@@ -32,24 +33,23 @@ class Testimonial_Statement extends Db_ActiveRecord
 
     public function define_form_fields($context = null) 
     {
-        $this->add_form_field('is_enabled')->tab('Statement')->renderAs(frm_checkbox);
         $this->add_form_field('title', 'left')->tab('Statement');
         $this->add_form_field('url', 'right')->tab('Statement');
-        $this->add_form_field('author_name', 'full')->tab('Statement');
-        $this->add_form_field('author_company', 'left')->tab('Statement');
-        $this->add_form_field('author_link', 'right')->tab('Statement');
+        $this->add_form_field('author_name', 'full')->tab('Author');
+        $this->add_form_field('author_company', 'left')->tab('Author');
+        $this->add_form_field('author_link', 'right')->tab('Author');
 
-        $content_field = $this->add_form_field('excerpt')->renderAs(frm_html)->size('small')->tab('Statement');
+
+        $content_field = $this->add_form_field('content')->renderAs(frm_html)->size('large')->tab('Statement');
         $content_field->htmlPlugins .= ',save,fullscreen,inlinepopups';
         $content_field->htmlButtons1 = 'save,separator,'.$content_field->htmlButtons1.',separator,fullscreen';
         $content_field->saveCallback('save_code');
         $content_field->htmlFullWidth = true;
 
-        $content_field = $this->add_form_field('content')->renderAs(frm_html)->size('small')->tab('Statement');
-        $content_field->htmlPlugins .= ',save,fullscreen,inlinepopups';
-        $content_field->htmlButtons1 = 'save,separator,'.$content_field->htmlButtons1.',separator,fullscreen';
-        $content_field->saveCallback('save_code');
-        $content_field->htmlFullWidth = true;
+        $content_field = $this->add_form_field('excerpt')->renderAs(frm_textarea)->size('small')->tab('Statement');
+        
+        $this->add_form_field('is_enabled', 'left')->tab('Statement')->renderAs(frm_checkbox)->comment('Check this to display on the front end');
+        $this->add_form_field('submitted_at', 'right')->tab('Statement');
         
         $this->add_form_field('images')->renderAs(frm_file_attachments)
             ->noLabel()->tab('Images')

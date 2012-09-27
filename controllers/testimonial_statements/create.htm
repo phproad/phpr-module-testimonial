@@ -7,8 +7,8 @@
     <?=flash() ?>
 
     <? if (!isset($fatalError)): ?>
-        <div class="form600">
-            <?=Phpr_Form::openTag(array('id' => 'form_element')) ?>
+        <div class="form-750">
+            <?=form_open(array('id'=>'form_element'))?>
                 <input type="hidden" value="1" id="new_record_flag" />
 
                 <? $this->formRender() ?>
@@ -18,8 +18,7 @@
                     <?=admin_ajax_button('Cancel', 'create_onCancel') ?>
                     <div class="clear"></div>
                 </div>
-
-            </form>
+            <?=form_close()?>
         </div>
     <? else: ?>
         <p><a href="<?=url($this->strings['controller_url']) ?>">Return to the <?=$this->strings['controller_name'] ?> list</a></p>

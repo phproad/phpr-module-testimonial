@@ -7,8 +7,8 @@
     <?=flash() ?>
 
     <? if (!isset($fatalError)): ?>
-        <div class="form-600">
-            <?=Phpr_Form::openTag() ?>
+        <div class="form-750">
+            <?=form_open(array('id'=>'form_element'))?>
                 <? $this->formRender() ?>
 
                 <div class="form_toolbar">
@@ -17,7 +17,7 @@
                     <?=admin_ajax_button('Delete', 'edit_onDelete', array('class' => "negative right"), "confirm: 'Do you really want to delete this ".$this->strings['model_name']."?'") ?>
                     <div class="clear"></div>
                 </div>
-            </form>
+            <?=form_close()?>
         </div>
     <? else: ?>
         <p><a href="<?=url($this->strings['controller_url']) ?>">Return to the <?=$this->strings['controller_name'] ?> list</a></p>
